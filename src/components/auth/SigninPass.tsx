@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FormSutmit, InputChange } from '../../interfaces/TypeScript';
+import { FormSutmit, InputChange } from '../../interfaces/react.interfaces';
+import { signin } from '../../redux/actions/auth.actions';
 
 const SigninPass = (): JSX.Element => {
   const initialState = { account: '', password: '' };
@@ -16,7 +17,7 @@ const SigninPass = (): JSX.Element => {
 
   const handleSubmit = (e: FormSutmit) => {
     e.preventDefault();
-    dispatch(userSignin);
+    dispatch(signin(userSignin));
   };
 
   return (

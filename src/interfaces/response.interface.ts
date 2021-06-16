@@ -12,12 +12,6 @@ export interface IUser extends IUserSignin {
 
 export interface IResSignin {
   message?: string;
-  token?: string;
+  accessToken?: string;
   user?: IUser;
-}
-
-export interface IResAlert {
-  loading?: boolean;
-  success?: string;
-  error?: string;
 }

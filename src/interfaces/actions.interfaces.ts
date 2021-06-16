@@ -1,5 +1,6 @@
 import { ALERT, AUTH } from '../redux/constants/constants';
-import { IResAlert, IResSignin } from './response.interface';
+import { IResAlert } from './alert.interfaces';
+import { IResSignin } from './response.interface';
 
 export interface ISignin {
   type: typeof AUTH;

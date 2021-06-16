@@ -5,7 +5,7 @@ import { IUserSignin } from '../../interfaces/auth.interface';
 import { IResSignin } from '../../interfaces/response.interface';
 import api from '../api';
 
-export const signup =
+export const signin =
   (userSignin: IUserSignin) =>
   async (
     dispatch: Dispatch<TypeActions>
@@ -14,12 +14,13 @@ export const signup =
     // if (errorLength > 0) return dispatch({ type: 'VALID', payload: errorMessage });
 
     dispatch({ type: 'ALERT', payload: { loading: true } });
-    const { data } = await api(dispatch, 'POST', '/auth/signup', userSignin);
+    const { data } = await api(dispatch, 'POST', '/auth/signin', userSignin);
+
     if (data !== null) {
-      const { token, user }: IResSignin = data;
+      const { accessToken: token, user, message }: IResSignin = data;
       dispatch({ type: 'AUTH', payload: { token, user } });
-      localStorage.setItem('firstLogin', 'true');
-      dispatch({ type: 'ALERT', payload: { success: data.message } });
+      // localStorage.setItem('firstLogin', 'true');
+      dispatch({ type: 'ALERT', payload: { success: message } });
     }
     return undefined;
   };
