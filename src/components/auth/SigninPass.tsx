@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { InputChange } from '../../interfaces/TypeScript';
+import { useDispatch } from 'react-redux';
+import { FormSutmit, InputChange } from '../../interfaces/TypeScript';
 
 const SigninPass = (): JSX.Element => {
   const initialState = { account: '', password: '' };
   const [userSignin, setUserSignin] = useState(initialState);
   const { account, password } = userSignin;
   const [typePass, setTypesPass] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChangeInput = (e: InputChange) => {
     const { value, name } = e.target;
     setUserSignin({ ...userSignin, [name]: value });
   };
 
+  const handleSubmit = (e: FormSutmit) => {
+    e.preventDefault();
+    dispatch(userSignin);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="form-group mb-3">
         <label htmlFor="account" className="form-label">
           Correo Electrónico / Número de Teléfono

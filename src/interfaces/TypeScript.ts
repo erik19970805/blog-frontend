@@ -1,6 +1,7 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 
 export type InputChange = ChangeEvent<HTMLInputElement>;
+export type FormSutmit = FormEvent<HTMLFormElement>;
 
 export interface IParams {
   page: string;
