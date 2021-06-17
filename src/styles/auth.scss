@@ -22,4 +22,20 @@
       opacity: 0.5;
     }
   }
+  & label,
+  span,
+  p {
+    font-weight: 600;
+  }
+  & input::placeholder {
+    opacity: 0.6;
+    font-size: 80%;
+  }
+  & a {
+    margin-left: 5px;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

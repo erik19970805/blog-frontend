@@ -5,7 +5,7 @@ const SigninSMS = (): JSX.Element => {
   return (
     <form>
       <div className="form-group mb-3">
-        <label htmlFor="phone">Numero de Telefono</label>
+        <label htmlFor="phone">Número de Teléfono</label>
         <input
           type="text"
           className="form-control"

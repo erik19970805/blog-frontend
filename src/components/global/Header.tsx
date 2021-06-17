@@ -10,7 +10,7 @@ const Header = (): JSX.Element => (
     </Link>
 
     <button
-      className="navbar-toggler"
+      className="navbar-toggler mb-1"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNav"

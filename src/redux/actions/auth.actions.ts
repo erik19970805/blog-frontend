@@ -1,15 +1,14 @@
-/* eslint-disable import/prefer-default-export */
 import { Dispatch } from 'redux';
-import { TypeActions } from '../../interfaces/actions.interfaces';
-import { IUserSignin } from '../../interfaces/auth.interface';
+import { IAlert, TypeActions } from '../../interfaces/actions.interfaces';
+import { IUserSignin, IUserSignup } from '../../interfaces/auth.interface';
 import { IResSignin } from '../../interfaces/response.interface';
+import { IErrorsValid, validRegister } from '../../utils/valid';
 import api from '../api';
+import { ALERT } from '../constants/constants';
 
 export const signin =
   (userSignin: IUserSignin) =>
-  async (
-    dispatch: Dispatch<TypeActions>
-  ): Promise<{ type: 'VALID'; payload: IUserSignin } | undefined> => {
+  async (dispatch: Dispatch<TypeActions>): Promise<void> => {
     // const { errorMessage, errorLength } = valid(userData);
     // if (errorLength > 0) return dispatch({ type: 'VALID', payload: errorMessage });
 
@@ -21,6 +20,20 @@ export const signin =
       dispatch({ type: 'AUTH', payload: { token, user } });
       // localStorage.setItem('firstLogin', 'true');
       dispatch({ type: 'ALERT', payload: { success: message } });
+    }
+  };
+
+export const signup =
+  (userSignup: IUserSignup) =>
+  async (dispatch: Dispatch<TypeActions>): Promise<IAlert | undefined> => {
+    const { errMsg, errLength }: IErrorsValid = validRegister(userSignup);
+    if (errLength > 0) return dispatch({ type: ALERT, payload: { error: errMsg } });
+
+    dispatch({ type: 'ALERT', payload: { loading: true } });
+    const { data } = await api(dispatch, 'POST', '/auth/signup', userSignup);
+
+    if (data !== null) {
+      dispatch({ type: 'ALERT', payload: { success: data.message } });
     }
     return undefined;
   };

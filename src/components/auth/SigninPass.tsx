@@ -7,7 +7,7 @@ const SigninPass = (): JSX.Element => {
   const initialState = { account: '', password: '' };
   const [userSignin, setUserSignin] = useState(initialState);
   const { account, password } = userSignin;
-  const [typePass, setTypesPass] = useState(false);
+  const [typePass, setTypePass] = useState(false);
   const dispatch = useDispatch();
 
   const handleChangeInput = (e: InputChange) => {
@@ -24,7 +24,7 @@ const SigninPass = (): JSX.Element => {
     <form onSubmit={handleSubmit}>
       <div className="form-group mb-3">
         <label htmlFor="account" className="form-label">
-          Correo Electrónico / Número de Teléfono
+          Correo Electrónico
         </label>
         <input
           type="text"
@@ -49,7 +49,7 @@ const SigninPass = (): JSX.Element => {
             value={password}
             onChange={handleChangeInput}
           />
-          <small onClick={() => setTypesPass(!typePass)}>{typePass ? 'Hide' : 'show'}</small>
+          <small onClick={() => setTypePass(!typePass)}>{typePass ? 'Hide' : 'show'}</small>
         </div>
       </div>
       <button type="submit" className="btn btn-dark w-100 mt-1" disabled={!(account && password)}>
