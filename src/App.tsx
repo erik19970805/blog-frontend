@@ -13,7 +13,7 @@ const App = (): JSX.Element => (
       <Switch>
         <Route exact path="/" component={PageRender} />
         <Route exact path="/:page" component={PageRender} />
-        <Route exact path="/:pag/:slug" component={PageRender} />
+        <Route exact path="/:page/:slug" component={PageRender} />
       </Switch>
       <Footer />
     </Router>
