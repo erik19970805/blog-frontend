@@ -12,6 +12,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.avatar {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: cover;
+  transform: translateY(-3px);
+  border-radius: 50%;
+}
+
 /* ------------------- Auth Page -------------------*/
 @import './auth.scss';
 

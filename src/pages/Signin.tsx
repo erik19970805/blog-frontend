@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import SigninPass from '../components/auth/SigninPass';
 import SigninSMS from '../components/auth/SigninSMS';
+import { RootStore } from '../interfaces/react.interfaces';
 
 const Signin = (): JSX.Element => {
   const [sms, setSms] = useState(false);
+  const history = useHistory();
+  const { auth } = useSelector((state: RootStore) => state);
+  useEffect(() => {
+    if (auth.accessToken) history.push('/');
+  }, [auth.accessToken, history]);
   return (
     <div className="auth-page">
       <div className="auth-box">
