@@ -9,11 +9,21 @@ import { ALERT, AUTH } from '../constants/constants';
 export const signin =
   (userSignin: IUserSignin) =>
   async (dispatch: Dispatch<TypeActions>): Promise<void> => {
-    // const { errorMessage, errorLength } = valid(userData);
-    // if (errorLength > 0) return dispatch({ type: 'VALID', payload: errorMessage });
-
     dispatch({ type: ALERT, payload: { loading: true } });
     const { data } = await api(dispatch, 'POST', '/auth/signin', userSignin);
+
+    if (data !== null) {
+      dispatch({ type: AUTH, payload: data });
+      localStorage.setItem('logged', 'true');
+      dispatch({ type: ALERT, payload: { success: data.message } });
+    }
+  };
+
+export const googleSignin =
+  (idToken: string) =>
+  async (dispatch: Dispatch<TypeActions>): Promise<void> => {
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const { data } = await api(dispatch, 'POST', '/auth/google_signin', { idToken });
 
     if (data !== null) {
       dispatch({ type: AUTH, payload: data });

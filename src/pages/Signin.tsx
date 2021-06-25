@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import SigninPass from '../components/auth/SigninPass';
 import SigninSMS from '../components/auth/SigninSMS';
+import SocialSignin from '../components/auth/SocialSignin';
 import { RootStore } from '../interfaces/react.interfaces';
 
 const Signin = (): JSX.Element => {
@@ -17,11 +18,12 @@ const Signin = (): JSX.Element => {
     <div className="auth-page">
       <div className="auth-box">
         <h3 className="text-uppercase text-center mb-4">Inicio de sección</h3>
+        <SocialSignin />
         {sms ? <SigninSMS /> : <SigninPass />}
         <small className="row my-2 text-primary" style={{ cursor: 'pointer' }}>
           <span className="col-6">
             <Link to="/forgot_password" className="col-6">
-              Olvido su contraseña?
+              ¿Olvido su contraseña?
             </Link>
           </span>
           <span className="col-6 text-end" onClick={() => setSms(!sms)}>
