@@ -19,19 +19,6 @@ export const signin =
     }
   };
 
-export const googleSignin =
-  (idToken: string) =>
-  async (dispatch: Dispatch<TypeActions>): Promise<void> => {
-    dispatch({ type: ALERT, payload: { loading: true } });
-    const { data } = await api(dispatch, 'POST', '/auth/google_signin', { idToken });
-
-    if (data !== null) {
-      dispatch({ type: AUTH, payload: data });
-      localStorage.setItem('logged', 'true');
-      dispatch({ type: ALERT, payload: { success: data.message } });
-    }
-  };
-
 export const signup =
   (userSignup: IUserSignup) =>
   async (dispatch: Dispatch<TypeActions>): Promise<IAlert | undefined> => {
@@ -76,4 +63,28 @@ export const signout =
     localStorage.removeItem('logged');
     await api(dispatch, 'GET', '/auth/signout');
     window.location.href = '/';
+  };
+
+export const googleSignin =
+  (idToken: string) =>
+  async (dispatch: Dispatch<TypeActions>): Promise<void> => {
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const { data } = await api(dispatch, 'POST', '/auth/google_signin', { idToken });
+    if (data !== null) {
+      dispatch({ type: AUTH, payload: data });
+      localStorage.setItem('logged', 'true');
+      dispatch({ type: ALERT, payload: { success: data.message } });
+    }
+  };
+
+export const facebookSignin =
+  (accessToken: string, userID: string) =>
+  async (dispatch: Dispatch<TypeActions>): Promise<void> => {
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const { data } = await api(dispatch, 'POST', '/auth/facebook_signin', { accessToken, userID });
+    if (data !== null) {
+      dispatch({ type: AUTH, payload: data });
+      localStorage.setItem('logged', 'true');
+      dispatch({ type: ALERT, payload: { success: data.message } });
+    }
   };
