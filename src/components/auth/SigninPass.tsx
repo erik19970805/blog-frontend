@@ -32,6 +32,7 @@ const SigninPass = (): JSX.Element => {
           id="account"
           name="account"
           value={account}
+          placeholder="ejemplo@gmail.com"
           onChange={handleChangeInput}
         />
       </div>

@@ -1,8 +1,9 @@
+/* eslint-disable no-alert */
 import { Dispatch } from 'redux';
-import { IAlert, TypeActions } from '../../interfaces/actions.interfaces';
+import { TypeActions } from '../../interfaces/actions.interfaces';
 import { IUserSignin, IUserSignup } from '../../interfaces/auth.interface';
 import { RootStore } from '../../interfaces/react.interfaces';
-import { IErrorsValid, validRegister } from '../../utils/valid';
+import { IErrorsValid, validPhone, validRegister } from '../../utils/valid';
 import api from '../api';
 import { ALERT, AUTH } from '../constants/constants';
 
@@ -21,7 +22,7 @@ export const signin =
 
 export const signup =
   (userSignup: IUserSignup) =>
-  async (dispatch: Dispatch<TypeActions>): Promise<IAlert | undefined> => {
+  async (dispatch: Dispatch<TypeActions>): Promise<TypeActions | undefined> => {
     const { errMsg, errLength }: IErrorsValid = validRegister(userSignup);
     if (errLength > 0) return dispatch({ type: ALERT, payload: { error: errMsg } });
 
@@ -88,3 +89,39 @@ export const facebookSignin =
       dispatch({ type: ALERT, payload: { success: data.message } });
     }
   };
+
+export const signinSMS =
+  (phone: string) =>
+  async (dispatch: Dispatch<TypeActions>): Promise<TypeActions | undefined> => {
+    const check = validPhone(phone);
+    if (!check)
+      return dispatch({ type: ALERT, payload: { error: 'El formato del número es incorrecto' } });
+
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const { data } = await api(dispatch, 'POST', '/auth/sms_signin', { phone });
+
+    if (!data.valid) {
+      verifySMS(phone, dispatch);
+    } else {
+      dispatch({ type: ALERT, payload: { error: 'El número de teléfono no está registrado' } });
+    }
+    return undefined;
+  };
+
+const verifySMS = async (phone: string, dispatch: Dispatch<TypeActions>): Promise<void> => {
+  const code = prompt('Ingrese el codigo');
+  if (!code) return;
+  dispatch({ type: ALERT, payload: { loading: true } });
+
+  const { data } = await api(dispatch, 'POST', '/auth/sms_verify', { phone, code });
+
+  if (!data) {
+    setTimeout(() => {
+      verifySMS(phone, dispatch);
+    }, 100);
+    return;
+  }
+  dispatch({ type: AUTH, payload: data });
+  dispatch({ type: ALERT, payload: { success: data.message } });
+  localStorage.setItem('logged', 'true');
+};

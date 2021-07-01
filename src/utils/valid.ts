@@ -13,7 +13,7 @@ const validateEmail = (email: string): boolean => {
   return re.test(email);
 };
 
-const validPhone = (phone: string) => {
+export const validPhone = (phone: string): boolean => {
   const re = /^[+]/g;
   return re.test(phone);
 };
