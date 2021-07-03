@@ -1,4 +1,4 @@
-import { TypeActions } from '../../interfaces/actions.interfaces';
+import { TypeActions } from '../../interfaces/actions.interface';
 import { IResSignin } from '../../interfaces/response.interface';
 import { AUTH } from '../constants/constants';
 

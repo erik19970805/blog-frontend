@@ -20,6 +20,8 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "camelcase": ["off", { "properties": "always" }],
+    "import/prefer-default-export": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "@typescript-eslint/ban-types": "off",
     "jsx-a11y/click-events-have-key-events": "off",

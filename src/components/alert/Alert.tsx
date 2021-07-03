@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { RootStore } from '../../interfaces/react.interfaces';
+import { RootStore } from '../../interfaces/react.interface';
 import Loading from './Loading';
 import Toast from './Toast';
 

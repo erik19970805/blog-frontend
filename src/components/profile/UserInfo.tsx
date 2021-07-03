@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IUserProfile } from '../../interfaces/auth.interface';
-import { InputChange, RootStore } from '../../interfaces/react.interfaces';
-import { IUser } from '../../interfaces/response.interface';
+import { IUserProfile } from '../../interfaces/profile.interface';
+import { FormSutmit, InputChange, RootStore } from '../../interfaces/react.interface';
+import { updateUser } from '../../redux/actions/profile.actions';
 import NotFound from '../global/NotFound';
 
 const UserInfo = (): JSX.Element => {
@@ -10,7 +10,7 @@ const UserInfo = (): JSX.Element => {
   const { auth } = useSelector((state: RootStore) => state);
   const dispatch = useDispatch();
   const [user, setUser] = useState<IUserProfile>(initialState);
-  const { name, account, avatar, password, cfPassword } = user;
+  const { name, avatar, password, cfPassword } = user;
   const [typePass, setTypePass] = useState(false);
   const [typeCfPass, setTypeCfPass] = useState(false);
 
@@ -27,10 +27,15 @@ const UserInfo = (): JSX.Element => {
     }
   };
 
+  const handleSubmit = (e: FormSutmit) => {
+    e.preventDefault();
+    if (avatar || name) dispatch(updateUser(avatar, name));
+  };
+
   if (!auth.user) return <NotFound />;
 
   return (
-    <form className="profile-info">
+    <form className="profile-info" onSubmit={handleSubmit}>
       <div className="info-avatar">
         <img src={avatar ? URL.createObjectURL(avatar) : auth.user?.avatar} alt="avatar" />
         <span>

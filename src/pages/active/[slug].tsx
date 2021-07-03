@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { IParams } from '../../interfaces/react.interfaces';
+import { IParams } from '../../interfaces/react.interface';
 import { active } from '../../redux/actions/auth.actions';
 
 const Active = (): JSX.Element => {

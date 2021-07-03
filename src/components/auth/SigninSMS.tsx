@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FormSutmit } from '../../interfaces/react.interfaces';
+import { FormSutmit } from '../../interfaces/react.interface';
 import { signinSMS } from '../../redux/actions/auth.actions';
 
 const SigninSMS = (): JSX.Element => {

@@ -5,7 +5,7 @@ import { Link, useHistory } from 'react-router-dom';
 import SigninPass from '../components/auth/SigninPass';
 import SigninSMS from '../components/auth/SigninSMS';
 import SocialSignin from '../components/auth/SocialSignin';
-import { RootStore } from '../interfaces/react.interfaces';
+import { RootStore } from '../interfaces/react.interface';
 
 const Signin = (): JSX.Element => {
   const [sms, setSms] = useState(false);

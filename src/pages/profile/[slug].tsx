@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import OtherInfo from '../../components/profile/OtherInfo';
 import UserBlogs from '../../components/profile/UserBlogs';
 import UserInfo from '../../components/profile/UserInfo';
-import { IParams, RootStore } from '../../interfaces/react.interfaces';
+import { IParams, RootStore } from '../../interfaces/react.interface';
 
 const Profile = (): JSX.Element => {
   const { slug }: IParams = useParams();

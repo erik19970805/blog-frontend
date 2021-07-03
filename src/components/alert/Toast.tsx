@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { TypeActions } from '../../interfaces/actions.interfaces';
+import { TypeActions } from '../../interfaces/actions.interface';
 import { ALERT } from '../../redux/constants/constants';
 
 interface IProps {

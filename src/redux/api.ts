@@ -1,11 +1,11 @@
 import axios, { AxiosResponse, Method } from 'axios';
 import { Dispatch } from 'redux';
-import { TypeActions } from '../interfaces/actions.interfaces';
+import { TypeActions } from '../interfaces/actions.interface';
 import { ALERT } from './constants/constants';
 
 const baseURL = 'http://localhost:4000/api';
 
-export default async (
+export const apiActions = async (
   dispatch: Dispatch<TypeActions>,
   method: Method,
   url: string,
@@ -25,4 +25,15 @@ export default async (
     });
     return { data: null };
   }
+};
+
+export const apiUrls = async (
+  method: Method,
+  url: string,
+  data?: {},
+  headers?: {}
+): Promise<AxiosResponse> => {
+  axios.defaults.withCredentials = false;
+  const res = await axios({ url, baseURL, method, data, headers });
+  return res.data;
 };

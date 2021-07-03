@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FormSutmit, InputChange } from '../../interfaces/react.interfaces';
+import { FormSutmit, InputChange } from '../../interfaces/react.interface';
 import { signup } from '../../redux/actions/auth.actions';
 
 const RegisterForm = (): JSX.Element => {

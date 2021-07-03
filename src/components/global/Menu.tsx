@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { RootStore } from '../../interfaces/react.interfaces';
+import { RootStore } from '../../interfaces/react.interface';
 import { signout } from '../../redux/actions/auth.actions';
 
 const Menu = (): JSX.Element => {
