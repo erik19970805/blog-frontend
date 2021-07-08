@@ -1,6 +1,7 @@
 import axios, { AxiosResponse, Method } from 'axios';
 import { Dispatch } from 'redux';
 import { TypeActions } from '../interfaces/actions.interface';
+import { IResImageUpload } from '../interfaces/profile.interface';
 import { ALERT } from './constants/constants';
 
 const baseURL = 'http://localhost:4000/api';
@@ -32,8 +33,8 @@ export const apiUrls = async (
   url: string,
   data?: {},
   headers?: {}
-): Promise<AxiosResponse> => {
+): Promise<AxiosResponse<IResImageUpload>> => {
   axios.defaults.withCredentials = false;
   const res = await axios({ url, baseURL, method, data, headers });
-  return res.data;
+  return res;
 };
