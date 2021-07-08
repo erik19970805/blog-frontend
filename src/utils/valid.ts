@@ -31,10 +31,17 @@ export const validRegister = (data: IUserSignup): IErrorsValid => {
   } else if (!validateEmail(account) && !validPhone(account)) {
     errors.push('El formato del correo electrónico o el numero de teléfono son incorrectos');
   }
-  if (password.length < 6) {
-    errors.push('La contraseña debe tener minimo 6 caracteres');
-  } else if (password !== cfPassword) {
-    errors.push('La confirmación de la contraseña no coincide con la contraseña');
-  }
+  const error = checkPassword(password, cfPassword);
+  if (error) errors.push(error);
   return { errMsg: errors, errLength: errors.length };
+};
+
+export const checkPassword = (password: string, cfPassword: string): string | undefined => {
+  if (password.length < 6) {
+    return 'La contraseña debe tener minimo 6 caracteres';
+  }
+  if (password !== cfPassword) {
+    return 'La confirmación de la contraseña no coincide con la contraseña';
+  }
+  return undefined;
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IUserProfile } from '../../interfaces/profile.interface';
 import { FormSutmit, InputChange, RootStore } from '../../interfaces/react.interface';
-import { updateUser } from '../../redux/actions/profile.actions';
+import { updateUser, resetPassword } from '../../redux/actions/profile.actions';
 import NotFound from '../global/NotFound';
 
 const UserInfo = (): JSX.Element => {
@@ -30,6 +30,7 @@ const UserInfo = (): JSX.Element => {
   const handleSubmit = (e: FormSutmit) => {
     e.preventDefault();
     if (avatar || name) dispatch(updateUser(avatar, name));
+    if (password) dispatch(resetPassword(password, cfPassword));
   };
 
   if (!auth.user) return <NotFound />;
@@ -73,6 +74,12 @@ const UserInfo = (): JSX.Element => {
           disabled
         />
       </div>
+      {auth.user.type !== 'register' && (
+        <small className="text-danger">
+          * Se Inicio sesisión rapida con {auth.user.type}, por ende no puede utilizar esta función
+          *
+        </small>
+      )}
       <div className="form-group my-3">
         <label htmlFor="password">Contraseña</label>
         <div className="pass">
@@ -83,6 +90,7 @@ const UserInfo = (): JSX.Element => {
             name="password"
             value={password}
             onChange={handleChangeInput}
+            disabled={auth.user.type !== 'register'}
           />
           <small onClick={() => setTypePass(!typePass)}>{typePass ? 'Hide' : 'Show'}</small>
         </div>
@@ -91,17 +99,17 @@ const UserInfo = (): JSX.Element => {
         <label htmlFor="cfPassword">Contraseña</label>
         <div className="pass">
           <input
-            type={typePass ? 'text' : 'password'}
+            type={typeCfPass ? 'text' : 'password'}
             className="form-control"
             id="cfPassword"
             name="cfPassword"
             value={cfPassword}
             onChange={handleChangeInput}
+            disabled={auth.user.type !== 'register'}
           />
           <small onClick={() => setTypeCfPass(!typeCfPass)}>{typeCfPass ? 'Hide' : 'Show'}</small>
         </div>
       </div>
-
       <button className="btn btn-outline-primary w-100" type="submit">
         Actualizar
       </button>
