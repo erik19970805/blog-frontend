@@ -6,12 +6,14 @@ import Header from './components/global/Header';
 import PageRender from './PageRender';
 import Alert from './components/alert/Alert';
 import { refreshToken } from './redux/actions/auth.actions';
+import { getCategories } from './redux/actions/category.actions';
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(refreshToken());
+    dispatch(getCategories());
   }, [dispatch]);
   return (
     <div className="container">
