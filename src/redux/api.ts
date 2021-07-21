@@ -6,12 +6,16 @@ import { ALERT } from './constants/constants';
 
 const baseURL = 'http://localhost:4000/api';
 
+interface IHeader {
+  Authorization?: string;
+}
+
 export const apiActions = async (
   dispatch: Dispatch<TypeActions>,
   method: Method,
   url: string,
   data?: {},
-  headers?: {}
+  headers?: IHeader
 ): Promise<AxiosResponse | { data: null }> => {
   try {
     axios.defaults.withCredentials = true;
