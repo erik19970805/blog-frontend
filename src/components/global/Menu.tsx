@@ -16,7 +16,7 @@ const Menu = (): JSX.Element => {
 
   const afLoginLinks = [
     { label: 'Inicio', path: '/' },
-    { label: 'CrearBlog', path: '/create_blog' },
+    { label: 'CrearBlog', path: '/createBlog' },
   ];
 
   const navLinks = auth.accessToken ? afLoginLinks : bfLoginLinks;
