@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CardHoriz from '../components/cards/CardHoriz';
 import CreateForm from '../components/cards/CreateForm';
 import NotFound from '../components/global/NotFound';
 import { IBlogs } from '../interfaces/blog.interface';
 import { RootStore } from '../interfaces/react.interface';
+import ReactQuil from '../components/editor/ReactQuil';
 
 const CreateBlog = (): JSX.Element => {
   const initState = {
@@ -17,7 +18,9 @@ const CreateBlog = (): JSX.Element => {
     createdAt: new Date().toISOString(),
   };
   const [blog, setBolg] = useState<IBlogs>(initState);
+  const [body, setBody] = useState('');
   const { auth, categories } = useSelector((state: RootStore) => state);
+  const dispatch = useDispatch();
 
   if (!auth.accessToken) return <NotFound />;
 
@@ -34,6 +37,7 @@ const CreateBlog = (): JSX.Element => {
           <CardHoriz blog={blog} />
         </div>
       </div>
+      <ReactQuil setBody={setBody} />
     </div>
   );
 };

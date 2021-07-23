@@ -2,12 +2,14 @@ import { IResImageUpload } from '../interfaces/profile.interface';
 import { apiUrls } from '../redux/api';
 
 export const checkImage = (file: File): string => {
+  const types = ['image/png', 'image/jpeg'];
   let error = '';
   if (!file) {
     error = 'La imagen no existe';
     return error;
   }
   if (file.size > 1024 * 1024) error = 'El tamaño de la imagen debe ser de maximo 1mb';
+  if (!types.includes(file.type)) error = 'La imagen debe esta en formato png, jpeg o jpg';
   return error;
 };
 
