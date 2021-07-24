@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
-/* eslint-disable import/prefer-default-export */
 import { IUserSignup } from '../interfaces/auth.interface';
+import { IBlogs } from '../interfaces/blog.interface';
 
 export interface IErrorsValid {
   errMsg: string[];
@@ -44,4 +44,40 @@ export const checkPassword = (password: string, cfPassword: string): string | un
     return 'La confirmación de la contraseña no coincide con la contraseña';
   }
   return undefined;
+};
+
+export const validCreateBlog = ({
+  title,
+  content,
+  description,
+  thumbnail,
+  category,
+}: IBlogs): IErrorsValid => {
+  const errors: string[] = [];
+
+  if (title.trim().length < 10) {
+    errors.push('title has at least 10 characters');
+  } else if (title.trim().length > 50) {
+    errors.push('Title is up to 50 characters long');
+  }
+
+  if (content.trim().length < 2000) {
+    errors.push('Content has at least 2000 characters');
+  }
+
+  if (description.trim().length < 50) {
+    errors.push('Description has at least 10 characters');
+  } else if (description.trim().length > 200) {
+    errors.push('Description is up to 200 characters long');
+  }
+
+  if (!thumbnail) {
+    errors.push('Thumbnail cannot be left blank');
+  }
+
+  if (!category) {
+    errors.push('Category cannot be left blank');
+  }
+
+  return { errMsg: errors, errLength: errors.length };
 };
