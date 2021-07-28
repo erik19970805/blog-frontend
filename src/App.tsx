@@ -7,13 +7,15 @@ import PageRender from './PageRender';
 import Alert from './components/alert/Alert';
 import { refreshToken } from './redux/actions/auth.actions';
 import { getCategories } from './redux/actions/category.actions';
+import { getBlogsHome } from './redux/actions/blog.actions';
 
 const App = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshToken());
+    dispatch(getBlogsHome());
     dispatch(getCategories());
+    dispatch(refreshToken());
   }, [dispatch]);
   return (
     <div className="container">
