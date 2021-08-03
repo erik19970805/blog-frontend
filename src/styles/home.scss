@@ -1,0 +1,31 @@
+.home {
+  &_page {
+    width: 100%;
+    margin: 1rem 0;
+    & h3 a {
+      text-transform: uppercase;
+      color: darkblue;
+      letter-spacing: 3;
+      margin-top: 1rem;
+      cursor: pointer;
+      & small {
+        font-size: 15px;
+      }
+    }
+    & h3:hover a {
+      color: crimson;
+      text-decoration: none;
+    }
+  }
+  &_blogs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-gap: 10px;
+    margin-bottom: 15px;
+    & .card a {
+      text-decoration: none;
+      text-transform: capitalize;
+    }
+  }
+}
