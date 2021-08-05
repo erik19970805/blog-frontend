@@ -5,7 +5,12 @@ import { RootStore } from '../../interfaces/react.interface';
 import { imageUpload } from '../../utils/imageUpload';
 import { apiActions } from '../api';
 import { ALERT } from '../constants/constants';
-import { GET_HOME_BLOGS, IGetHomeBlogsType } from '../types/blogType.types';
+import {
+  GET_BLOGS_BY_CATEGORY_ID,
+  GET_HOME_BLOGS,
+  IGetBlogsCategoryType,
+  IGetHomeBlogsType,
+} from '../types/blogType.types';
 
 export const createBlog =
   (blog: IBlogs) =>
@@ -36,5 +41,16 @@ export const getBlogsHome =
     if (data !== null) {
       dispatch({ type: ALERT, payload: { success: data.message } });
       dispatch({ type: GET_HOME_BLOGS, payload: data });
+    }
+  };
+
+export const getBlogsByCategoryId =
+  (id: string) =>
+  async (dispatch: Dispatch<TypeActions | IGetBlogsCategoryType>): Promise<void> => {
+    dispatch({ type: ALERT, payload: { loading: true } });
+    const { data } = await apiActions(dispatch, 'GET', `/blog/category/${id}`);
+    if (data !== null) {
+      dispatch({ type: GET_BLOGS_BY_CATEGORY_ID, payload: { ...data, id } });
+      dispatch({ type: ALERT, payload: { loading: false } });
     }
   };

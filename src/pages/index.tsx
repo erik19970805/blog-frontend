@@ -1,11 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Loading from '../components/alert/Loading';
 import CardVert from '../components/cards/CardVert';
 import { RootStore } from '../interfaces/react.interface';
 
 const Home = (): JSX.Element => {
   const { homeBlogs } = useSelector((state: RootStore) => state);
+
+  if (homeBlogs.length === 0) return <Loading />;
+
   return (
     <div className="home_page">
       {homeBlogs.map((homeBlog) => (
