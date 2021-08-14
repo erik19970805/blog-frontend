@@ -5,6 +5,7 @@ import { checkImage, imageUpload } from '../../utils/imageUpload';
 import { checkPassword } from '../../utils/valid';
 import { apiActions } from '../api';
 import { ALERT, AUTH } from '../constants/constants';
+import { GET_OTHER_INFO, IGetOtherInfo } from '../types/profile.types';
 
 export const updateUser =
   (avatar: File | string, name: string) =>
@@ -56,6 +57,17 @@ export const resetPassword =
       { Authorization: auth.accessToken }
     );
     if (data !== null) {
+      dispatch({ type: ALERT, payload: { success: data.message } });
+    }
+    return undefined;
+  };
+
+export const getOtherInfo =
+  (id: string) =>
+  async (dispatch: Dispatch<TypeActions | IGetOtherInfo>): Promise<void | TypeActions> => {
+    const { data } = await apiActions(dispatch, 'GET', `/user/${id}`);
+    if (data !== null) {
+      dispatch({ type: GET_OTHER_INFO, payload: data });
       dispatch({ type: ALERT, payload: { success: data.message } });
     }
     return undefined;

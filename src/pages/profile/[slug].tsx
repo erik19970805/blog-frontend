@@ -11,7 +11,9 @@ const Profile = (): JSX.Element => {
   const { auth } = useSelector((state: RootStore) => state);
   return (
     <div className="row my-3">
-      <div className="col-md-5 mb-3">{auth.user?._id === slug ? <UserInfo /> : <OtherInfo />}</div>
+      <div className="col-md-5 mb-3">
+        {auth.user?._id === slug ? <UserInfo /> : <OtherInfo id={auth.user?._id || ''} />}
+      </div>
       <div className="col-md-7">
         <UserBlogs />
       </div>
