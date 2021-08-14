@@ -18,11 +18,11 @@ const Home = (): JSX.Element => {
             <>
               <h3>
                 <Link to={`/blogs/${homeBlog.name.toLowerCase()}`}>
-                  {homeBlog.name}
-                  <small>({homeBlog.count})</small>
+                  {homeBlog.name} <small>({homeBlog.count})</small>
                 </Link>
               </h3>
               <hr className="mt-1" />
+
               <div className="home_blogs">
                 {homeBlog.blogs.map((blog) => (
                   <CardVert key={blog._id} blog={blog} />
@@ -30,8 +30,9 @@ const Home = (): JSX.Element => {
               </div>
             </>
           )}
+
           {homeBlog.count > 4 && (
-            <Link className="text-end d-block mt-2 mb-3" to={`/blog/${homeBlog.name}`}>
+            <Link className="text-end d-block mt-2 mb-3" to={`/blogs/${homeBlog.name}`}>
               Read more &gt;&gt;
             </Link>
           )}

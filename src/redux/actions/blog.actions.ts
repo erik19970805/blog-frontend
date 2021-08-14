@@ -45,12 +45,18 @@ export const getBlogsHome =
   };
 
 export const getBlogsByCategoryId =
-  (id: string) =>
+  (id: string, search: string) =>
   async (dispatch: Dispatch<TypeActions | IGetBlogsCategoryType>): Promise<void> => {
+    const limit = 8;
+    const value = search || `?page=${1}`;
     dispatch({ type: ALERT, payload: { loading: true } });
-    const { data } = await apiActions(dispatch, 'GET', `/blog/category/${id}`);
+    const { data } = await apiActions(
+      dispatch,
+      'GET',
+      `/blog/category/${id}${value}&limit=${limit}`
+    );
     if (data !== null) {
-      dispatch({ type: GET_BLOGS_BY_CATEGORY_ID, payload: { ...data, id } });
+      dispatch({ type: GET_BLOGS_BY_CATEGORY_ID, payload: { ...data, id, search } });
       dispatch({ type: ALERT, payload: { loading: false } });
     }
   };

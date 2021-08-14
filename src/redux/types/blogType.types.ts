@@ -19,6 +19,7 @@ export interface IBlogsCategory {
   id: string;
   blogs: IBlogs[];
   total: number;
+  search: string;
 }
 
 export interface IGetBlogsCategoryType {
